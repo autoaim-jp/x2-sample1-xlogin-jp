@@ -21,7 +21,16 @@ app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+// APIルートを定義
 app.get(API_PATH.HELLO, helloAction)
+
+// 静的ファイルの配信設定
+app.use('/static', express.static('view/static'))
+app.use('/', express.static('view/build'))
+
+app.use((req, res) => {
+  res.status(404).send('Not Found')
+})
 
 app.listen(port, () => {
   logger.info(`Server is running on port ${port}`)
