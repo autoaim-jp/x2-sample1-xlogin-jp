@@ -11,7 +11,7 @@ down:
 	docker compose down
 
 rebuild:
-	docker compose down --volumes
+	# docker compose down --volumes
 	docker compose build --no-cache
 
 install-package:
