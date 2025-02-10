@@ -1,0 +1,19 @@
+# docker-compose.yml
+version: '3'
+services:
+  nodejs:
+    build:
+      context: ./service/nodejs
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ./service/nodejs/src:/app
+      - nodemodules:/app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+
+volumes:
+  nodemodules:
+    name: ${PROJECT_NAME}-nodejs-nodemodules
+
