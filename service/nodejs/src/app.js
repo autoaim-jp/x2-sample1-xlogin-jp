@@ -4,7 +4,7 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import { API_PATH } from './setting.js'
-import { helloAction } from './action.js'
+import { helloAction, pingAction } from './action.js'
 
 const logger = winston.createLogger({
   level: 'info',
@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // APIルートを定義
 app.get(API_PATH.HELLO, helloAction)
+app.get(API_PATH.PING, pingAction)
 
 // 静的ファイルの配信設定
 app.use('/static', express.static('view/static'))
