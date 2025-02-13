@@ -7,17 +7,17 @@ WORKDIR /app/server
 COPY ../server/package.json ./
 # COPY ../server/yarn.lock ./  ← yarn.lock を管理している場合は有効にしてください
 
-RUN yarn install
-
 ARG UID
 ARG GID
 
 RUN groupmod -g ${GID} node && \
     usermod -u ${UID} -g ${GID} node && \
-    mkdir -p /app/server/client && \
     chown -R node:node /app
 
+# yarn installを実行する前にユーザーを切り替え
 USER node
+
+RUN yarn install
 
 CMD ["yarn", "start"]
 
