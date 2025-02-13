@@ -3,16 +3,16 @@ services:
     container_name: ${PROJECT_NAME}-server-test-nodejs
     build:
       context: ../service/nodejs
-      dockerfile: docker/Dockerfile.serverTest
+      dockerfile: setting/docker/Dockerfile.serverTest
       args:
         UID: ${UID}
         GID: ${GID}
     working_dir: /app/serverTest
     command: yarn test
     volumes:
-      - ../service/nodejs/server:/app/server:delegated
-      - ../service/nodejs/client:/app/server/client:delegated
-      - ../service/nodejs/serverTest:/app/serverTest:delegated
+      - ../service/nodejs/core/server:/app/server:delegated
+      - ../service/nodejs/core/client:/app/server/client:delegated
+      - ../service/nodejs/test/serverTest:/app/serverTest:delegated
       - nodemodules-server:/app/server/node_modules
       - nodemodules-serverTest:/app/serverTest/node_modules
     ports:
