@@ -2,17 +2,19 @@
 include setting.conf
 export PROJECT_NAME
 
-.PHONY: up down rebuild install-package
+.PHONY: up down rebuild install-package down-and-remove-volume
 
 up:
-	docker compose -f ./app/docker-compose.app.yml up
+	UID=$$(id -u) GID=$$(id -g) docker compose -f ./app/docker-compose.app.yml up
 
 down:
 	docker compose -f ./app/docker-compose.app.yml down
 
+down-and-remove-volume:
+	docker compose -f ./app/docker-compose.app.yml down --volumes
+
 rebuild:
-	# docker compose down --volumes
-	docker compose -f ./app/docker-compose.app.yml build --no-cache
+	UID=$$(id -u) GID=$$(id -g) docker compose -f ./app/docker-compose.app.yml build --no-cache
 
 install-package:
 	@if [ -z "$(CONTAINER)" ] || [ -z "$(PACKAGE)" ]; then \

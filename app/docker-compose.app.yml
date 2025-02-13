@@ -1,19 +1,24 @@
 version: '3'
 services:
   nodejs:
+    container_name: ${PROJECT_NAME}-app-nodejs
     build:
       context: ../service/nodejs
       dockerfile: docker/Dockerfile
+      args:
+        UID: ${UID}
+        GID: ${GID}
     volumes:
-      - ../service/nodejs/server:/app
-      - ../service/nodejs/client:/app/client
-      - nodemodules:/app/node_modules
+      - ../service/nodejs/server:/app/server:delegated
+      - ../service/nodejs/client:/app/server/client:delegated
+      - nodemodules:/app/server/node_modules
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=development
+    user: "${UID}:${GID}"
 
 volumes:
   nodemodules:
-    name: ${PROJECT_NAME}-nodejs-nodemodules
+    name: ${PROJECT_NAME}-app-nodejs-nodemodules
 

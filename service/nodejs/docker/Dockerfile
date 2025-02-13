@@ -1,7 +1,7 @@
 # service/nodejs/docker/Dockerfile
 FROM node:latest
 
-WORKDIR /app
+WORKDIR /app/server
 
 # 依存パッケージインストール用に package.json (および yarn.lock があれば) をコピー
 COPY ../server/package.json ./
@@ -9,5 +9,15 @@ COPY ../server/package.json ./
 
 RUN yarn install
 
-CMD ["npm", "start"]
+ARG UID
+ARG GID
+
+RUN groupmod -g ${GID} node && \
+    usermod -u ${UID} -g ${GID} node && \
+    mkdir -p /app/server/client && \
+    chown -R node:node /app
+
+USER node
+
+CMD ["yarn", "start"]
 
