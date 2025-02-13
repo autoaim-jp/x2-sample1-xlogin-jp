@@ -1,0 +1,8 @@
+---
+description: coding
+globs: *.js
+---
+
+# Your rule content
+
+- [code-cursor.md](mdc:.doc/code/code-cursor.md)

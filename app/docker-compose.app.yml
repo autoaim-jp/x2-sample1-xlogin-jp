@@ -1,13 +1,12 @@
-# docker-compose.yml
 version: '3'
 services:
   nodejs:
     build:
-      context: ./service/nodejs
+      context: ../service/nodejs
       dockerfile: docker/Dockerfile
     volumes:
-      - ./service/nodejs/src:/app
-      - ./service/nodejs/view:/app/view
+      - ../service/nodejs/server:/app
+      - ../service/nodejs/client:/app/client
       - nodemodules:/app/node_modules
     ports:
       - "3000:3000"

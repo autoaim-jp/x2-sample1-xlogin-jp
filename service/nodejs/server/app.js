@@ -1,4 +1,3 @@
-// service/nodejs/src/app.js
 import winston from 'winston'
 import express from 'express'
 import cookieParser from 'cookie-parser'
@@ -26,8 +25,8 @@ app.get(API_PATH.HELLO, helloAction)
 app.get(API_PATH.PING, pingAction)
 
 // 静的ファイルの配信設定
-app.use('/static', express.static('view/static'))
-app.use('/', express.static('view/build'))
+app.use('/static', express.static('client/static'))
+app.use('/', express.static('client/build'))
 
 app.use((req, res) => {
   res.status(404).send('Not Found')

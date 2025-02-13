@@ -5,14 +5,14 @@ export PROJECT_NAME
 .PHONY: up down rebuild install-package
 
 up:
-	docker compose up
+	docker compose -f ./app/docker-compose.app.yml up
 
 down:
-	docker compose down
+	docker compose -f ./app/docker-compose.app.yml down
 
 rebuild:
 	# docker compose down --volumes
-	docker compose build --no-cache
+	docker compose -f ./app/docker-compose.app.yml build --no-cache
 
 install-package:
 	@if [ -z "$(CONTAINER)" ] || [ -z "$(PACKAGE)" ]; then \
