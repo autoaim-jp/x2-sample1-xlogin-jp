@@ -1,4 +1,4 @@
-# service/nodejs/docker/Dockerfile
+# service/nodejs/docker/Dockerfile.app
 FROM node:latest
 
 WORKDIR /app/server

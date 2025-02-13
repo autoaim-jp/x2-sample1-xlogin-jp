@@ -32,7 +32,12 @@ app.use((req, res) => {
   res.status(404).send('Not Found')
 })
 
-app.listen(port, () => {
-  logger.info(`Server is running on port ${port}`)
-})
+// アプリケーションの起動を条件分岐
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port, () => {
+    logger.info(`Server is running on port ${port}`)
+  })
+}
+
+export default app
 
